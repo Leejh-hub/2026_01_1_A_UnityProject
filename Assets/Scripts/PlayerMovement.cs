@@ -36,21 +36,21 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // 위쪽 방향으로 설정한 힘 수치만큼 힘을 가함
             isGrounded = false; // 점프를 하는 순간 땅에서 떨어졌기 때문에 false
         }
-        private void OnCollisionEnter(Collision collision) // 유니티에서 지원하는 충돌 체크 함수
-        { 
-            if (collision.gameObject.tag == "Ground") // 충돌한 물체의 Tag가 Ground 일 경우
-            {
-                isGrounded = true;        
-            }
-        }
-        
-        private void OnTriggerEnter(Collider other)
+    }
+    void OnCollisionEnter(Collision collision) // 유니티에서 지원하는 충돌 체크 함수
+    {
+        if (collision.gameObject.tag == "Ground") // 충돌한 물체의 Tag가 Ground 일 경우
         {
-            if (other.CompareTag("Coin")) // Tag가 Coin 일 경우
-            {
-                coinCount++;   // 코인 변수를 1 올린다
-                Destroy(other.gameObject); //코인 오브젝트를 파괴한다.
-            }
+            isGrounded = true;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coin")) // Tag가 Coin 일 경우
+        {
+            coinCount++;   // 코인 변수를 1 올린다
+            Destroy(other.gameObject); //코인 오브젝트를 파괴한다.
         }
     }
 }
